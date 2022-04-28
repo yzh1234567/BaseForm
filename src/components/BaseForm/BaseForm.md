@@ -33,6 +33,7 @@
 <!-- @vuese:BaseForm:slots:start -->
 |Name|Description|Default Slot Content|
 |---|---|---|
+|self|有自定义组件需求时;自定义组件插槽内容|-|
 |other|其他插槽|-|
 |default|默认插槽|操作的按钮|
 |operate|操作操作|其他的操作按钮|

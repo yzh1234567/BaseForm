@@ -33,6 +33,7 @@
 <!-- @vuese:BaseForm:slots:start -->
 |Name|Description|Default Slot Content|
 |---|---|---|
+|self|有自定义组件需求时;自定义组件插槽内容|-|
 |other|其他插槽|-|
 |default|默认插槽|操作的按钮|
 |operate|操作操作|其他的操作按钮|
@@ -51,6 +52,9 @@
 |handleReset|重置按钮的点击事件 |-|
 
 <!-- @vuese:BaseForm:methods:end -->
+
+
+
 
 
 
@@ -79,10 +83,12 @@ export default {
            return {
                form:{
                  name:'',
-                 sex:''
+                 sex:'',
+                 channel:''
                },
                fields:[
                  {  
+                    tag:'el-input',  //标签名称
                     options:[], //为下拉选择框准备
                     type:'text',
                     name:'name',
@@ -105,8 +111,8 @@ export default {
                     ...  //兼容element form表单元素的任意属性
                  },
                  {
-                     options:[], //为下拉选择框准备
-                    type:'select',
+                    options:[], //为下拉选择框准备
+                    tag:'el-select',
                     name:'sex',
                     value:'',  //默认值
                     label:'性别',
@@ -126,23 +132,27 @@ export default {
                     },
                     ...  //兼容element form表单元素的任意属性
                  },
+                 {
+                    label:'渠道',
+                    tag:'el-checkbox-group',
+                    name:'channel',
+                    value:'',
+                    placeholder:'请选择渠道',
+                    options:[
+                        {
+                            label:'天猫',
+                            value:1
+                        },
+                        {
+                            label:'京东',
+                            value:2
+                        }
+                    ],
+                    block:true,//用于判断元素是用块级元素渲染还是行级元素渲染
                  }
+                   
                ]
            }
-           //type 对应标签关系
-           // ["text", "textarea"]  el-input
-           // select     el-select
-           //["year","month","date","week","datetime","datetimerange","daterange",] el-date-picker
-           // checkbox el-checkbox-group
-           //radio     el-radio-group
-           //number    el-input-number
-           //switch    el-switch
-           //slider    el-slider
-           //transfer  el-transfer
-           //timePicker el-time-picker
-           //timeSelect el-time-select
-           //cascader el-cascader
-           //rate   el-rate
        },
 
 </script>
