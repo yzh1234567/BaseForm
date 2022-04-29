@@ -89,8 +89,8 @@ export default {
                fields:[
                  {  
                     tag:'el-input',  //标签名称
-                    options:[], //为下拉选择框准备
-                    type:'text',
+                    options:[], //为下拉选择框\多选框\单选框准备
+                    type:'text', //指明文本框是输入框还是文本域
                     name:'name',
                     value:'',  //默认值
                     label:'姓名',
@@ -137,6 +137,7 @@ export default {
                     tag:'el-checkbox-group',
                     name:'channel',
                     value:'',
+                    button:true, //用于判断单选、多选框是否为按钮组
                     placeholder:'请选择渠道',
                     options:[
                         {
@@ -150,7 +151,6 @@ export default {
                     ],
                     block:true,//用于判断元素是用块级元素渲染还是行级元素渲染
                  }
-                   
                ]
            }
        },

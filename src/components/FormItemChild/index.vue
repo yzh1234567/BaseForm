@@ -19,7 +19,7 @@ export default {
       default() {
         return {}
       },
-    }
+    },
   },
   render() {
     return this.renderItem(this.info)
@@ -30,81 +30,124 @@ export default {
     },
     renderItem(element) {
       let renderObj = {
-         ...element,
-         attrs:{...element}
+        ...element,
+        attrs: { ...element },
       }
+      let tag = element.tag || "el-input"
       if (element.tag === "el-select") {
         return (
-          <el-select 
-             {...renderObj}
-             vModel={this.form[element.name]}
-            >
+          <tag {...renderObj} vModel={this.form[element.name]}>
             {element.options.map((e, index) => {
+              let attrs = {
+                ...e,
+                attrs: { ...e },
+              }
               return (
                 <el-option
+                  {...attrs}
                   label={e.label}
                   value={e.value}
                   key={index}
                 ></el-option>
               )
             })}
-          </el-select>
+          </tag>
         )
       }
-      if (element.tag === "el-checkbox-group") {
+      if (["el-checkbox-group", "el-radio-group"].includes(element.tag)) {
+        let tag1 = element.tag.includes("el-checkbox")
+          ? "el-checkbox"
+          : "el-radio"
+        tag1 = element.button ? `${tag1}-button` : tag1
         return (
-          <el-checkbox-group
-            {...renderObj}
-            vModel={this.form[element.name]}
-          >
+          <tag {...renderObj} vModel={this.form[element.name]}>
             {element.options.map((e, index) => {
+              let attrs = {
+                ...e,
+                attrs: { ...e },
+              }
               return element.block ? (
                 <el-col>
-                  <el-checkbox label={e.value} key={index}>
+                  <tag1 {...attrs} label={e.value} key={index}>
                     {e.label}
-                  </el-checkbox>
+                  </tag1>
                 </el-col>
               ) : (
-                <el-checkbox label={e.value} key={index}>
+                <tag1 {...attrs} label={e.value} key={index}>
                   {e.label}
-                </el-checkbox>
+                </tag1>
               )
             })}
-          </el-checkbox-group>
+          </tag>
         )
       }
-      if (element.tag === "el-radio-group") {
-        return (
-          <el-radio-group
-            {...renderObj}
-            vModel={this.form[element.name]}
-          >
-            {element.options.map((e, index) => {
-              return element.block ? (
-                <el-col>
-                  <el-radio label={e.value} key={index}>
-                    {e.label}
-                  </el-radio>
-                </el-col>
-              ) : (
-                <el-radio label={e.value} key={index}>
-                  {e.label}
-                </el-radio>
-              )
-            })}
-          </el-radio-group>
-        )
-      }
-      let tag = element.tag||'el-input'
-       return (
-          <tag
-            {...renderObj}
-            vModel={this.form[element.name]}
-            onBlur={(e) => {
-              this.$emit("blur", e)
-            }}
-          ></tag>
-        )
+      return (
+        <tag
+          {...renderObj}
+          vModel={this.form[element.name]}
+          onBlur={(e) => {
+            this.$emit("blur", e)
+          }}
+          onChange={(e) => {
+            this.$emit("change", e)
+          }}
+          onFocus={(e) => {
+            this.$emit("focus", e)
+          }}
+        ></tag>
+      )
+      // if (element.tag === "el-checkbox-group") {
+      //   return (
+      //     <tag
+      //       {...renderObj}
+      //       vModel={this.form[element.name]}
+      //     >
+      //       {element.options.map((e, index) => {
+      //         let attrs ={
+      //           ...e,
+      //           attrs:{...e}
+      //         }
+      //         return element.block ? (
+      //           <el-col>
+      //             <el-checkbox {...attrs} label={e.value} key={index}>
+      //               {e.label}
+      //             </el-checkbox>
+      //           </el-col>
+      //         ) : (
+      //           <el-checkbox {...attrs} label={e.value} key={index}>
+      //             {e.label}
+      //           </el-checkbox>
+      //         )
+      //       })}
+      //     </tag>
+      //   )
+      // }
+      // if (element.tag === "el-radio-group") {
+      //   return (
+      //     <tag
+      //       {...renderObj}
+      //       vModel={this.form[element.name]}
+      //     >
+      //       {element.options.map((e, index) => {
+      //         let attrs ={
+      //           ...e,
+      //           attrs:{...e}
+      //         }
+      //         return element.block ? (
+      //           <el-col>
+      //             <el-radio {...attrs} label={e.value} key={index}>
+      //               {e.label}
+      //             </el-radio>
+      //           </el-col>
+      //         ) : (
+      //           <el-radio {...attrs} label={e.value} key={index}>
+      //             {e.label}
+      //           </el-radio>
+      //         )
+      //       })}
+      //     </tag>
+      //   )
+      // }
       // if (element.type === "number") {
       //   return (
       //     <el-input-number
