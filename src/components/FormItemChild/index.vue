@@ -54,7 +54,7 @@ export default {
           </tag>
         )
       }
-      if (["el-checkbox-group", "el-radio-group"].includes(element.tag)) {
+      if (["el-checkbox-group"].includes(element.tag)) {
         let tag1 = element.tag.includes("el-checkbox")
           ? "el-checkbox"
           : "el-radio"
@@ -79,6 +79,29 @@ export default {
               )
             })}
           </tag>
+        )
+      }
+       if ( ["el-radio-group",'el-radio'].includes(element.tag)) {
+        return (
+            <div>{
+              element.options.map((e, index) => {
+                let attrs ={
+                  ...e,
+                  attrs:{...e}
+                }
+                return element.block ? (
+                  <el-col key={index}>
+                    <el-radio {...attrs}  label={e.value} vModel={this.form[element.name]}>
+                      {e.label}
+                    </el-radio>
+                  </el-col>
+                ) : (
+                  <el-radio   label={e.value} key={index} vModel={this.form[element.name]}>
+                    {e.label}
+                  </el-radio>
+                )
+              })
+            }</div>
         )
       }
       return (
