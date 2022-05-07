@@ -1,6 +1,6 @@
 {
   "name": "baseformjsx",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "这是一个基于element-ui的form表单组件;兼容element-ui表单元素的所有属性;采用jsx写法;动态渲染表单元素",
   "keywords": [
     "表单",
@@ -14,6 +14,13 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yzh1234567/BaseForm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yzh1234567/BaseForm/issues"
+  },
   "main": "dist/index.umd.min.js",
   "author": "yzh1234567",
   "license": "MIT",
@@ -24,9 +31,11 @@
     "docs": "vuese gen"
   },
   "dependencies": {
+    "compression-webpack-plugin": "^4.0.0",
     "core-js": "^3.22.2",
     "element-ui": "^2.15.8",
     "husky": "^7.0.4",
+    "terser-webpack-plugin": "^5.3.1",
     "vue": "^2.6.14"
   },
   "devDependencies": {
