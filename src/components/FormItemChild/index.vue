@@ -36,7 +36,9 @@ export default {
       let tag = element.tag || "el-input"
       if (element.tag === "el-select") {
         return (
-          <tag {...renderObj} vModel={this.form[element.name]}>
+          <tag {...renderObj} vModel={this.form[element.name]} onChange={(e) => {
+            this.$emit("change", e)
+          }}>
             {element.options.map((e, index) => {
               let attrs = {
                 ...e,
@@ -60,7 +62,9 @@ export default {
           : "el-radio"
         tag1 = element.button ? `${tag1}-button` : tag1
         return (
-          <tag {...renderObj} vModel={this.form[element.name]}>
+          <tag {...renderObj} vModel={this.form[element.name]} onChange={(e) => {
+            this.$emit("change", e)
+          }}>
             {element.options.map((e, index) => {
               let attrs = {
                 ...e,
@@ -91,12 +95,22 @@ export default {
                 }
                 return element.block ? (
                   <el-col key={index}>
-                    <el-radio {...attrs}  label={e.value} vModel={this.form[element.name]}>
+                    <el-radio {...attrs}  
+                       label={e.value} 
+                       vModel={this.form[element.name]} 
+                       onChange={(e) => {
+                          this.$emit("change", e)
+                        }}>
                       {e.label}
                     </el-radio>
                   </el-col>
                 ) : (
-                  <el-radio   label={e.value} key={index} vModel={this.form[element.name]}>
+                  <el-radio {...attrs}  
+                       label={e.value} 
+                       vModel={this.form[element.name]} 
+                       onChange={(e) => {
+                          this.$emit("change", e)
+                        }}>
                     {e.label}
                   </el-radio>
                 )
