@@ -20,7 +20,6 @@
               <form-item-child
                 :info="item"
                 :form="form"
-                @blur="handleBlur"
               ></form-item-child>
         </slot>
       </el-form-item>
@@ -146,8 +145,6 @@ export default {
     resetValid() {
       this.$refs.formJSX.resetFields()
     },
-    // 失焦
-    handleBlur(e) {},
     // 搜索
     /**
      * @vuese

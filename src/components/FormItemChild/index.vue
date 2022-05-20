@@ -36,9 +36,7 @@ export default {
       let tag = element.tag || "el-input"
       if (element.tag === "el-select") {
         return (
-          <tag {...renderObj} vModel={this.form[element.name]} onChange={(e) => {
-            this.$emit("change", e)
-          }}>
+          <tag {...renderObj} vModel={this.form[element.name]}>
             {element.options.map((e, index) => {
               let attrs = {
                 ...e,
@@ -62,9 +60,7 @@ export default {
           : "el-radio"
         tag1 = element.button ? `${tag1}-button` : tag1
         return (
-          <tag {...renderObj} vModel={this.form[element.name]} onChange={(e) => {
-            this.$emit("change", e)
-          }}>
+          <tag {...renderObj} vModel={this.form[element.name]}>
             {element.options.map((e, index) => {
               let attrs = {
                 ...e,
@@ -98,9 +94,7 @@ export default {
                     <el-radio {...attrs}  
                        label={e.value} 
                        vModel={this.form[element.name]} 
-                       onChange={(e) => {
-                          this.$emit("change", e)
-                        }}>
+                      >
                       {e.label}
                     </el-radio>
                   </el-col>
@@ -108,9 +102,7 @@ export default {
                   <el-radio {...attrs}  
                        label={e.value} 
                        vModel={this.form[element.name]} 
-                       onChange={(e) => {
-                          this.$emit("change", e)
-                        }}>
+                      >
                     {e.label}
                   </el-radio>
                 )
@@ -122,15 +114,6 @@ export default {
         <tag
           {...renderObj}
           vModel={this.form[element.name]}
-          onBlur={(e) => {
-            this.$emit("blur", e)
-          }}
-          onChange={(e) => {
-            this.$emit("change", e)
-          }}
-          onFocus={(e) => {
-            this.$emit("focus", e)
-          }}
         ></tag>
       )
       // if (element.tag === "el-checkbox-group") {

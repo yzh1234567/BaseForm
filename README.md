@@ -130,6 +130,10 @@ export default {
                     style:{
                         width:'300px'
                     },
+                    on:{
+                        click:this.click,//点击事件
+                        change:this.change,//改变事件
+                    }
                     ...  //兼容element form表单元素的任意属性
                  },
                  {
