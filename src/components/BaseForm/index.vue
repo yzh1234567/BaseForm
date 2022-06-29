@@ -14,13 +14,10 @@
         :label="item.label"
         :prop="item.name"
         :rules="item.rules"
-      > 
-      <!-- 有自定义组件需求时;自定义组件插槽内容-->
+      >
+        <!-- 有自定义组件需求时;自定义组件插槽内容-->
         <slot name="self" :data="item">
-              <form-item-child
-                :info="item"
-                :form="form"
-              ></form-item-child>
+          <form-item-child :info="item" :form="form"></form-item-child>
         </slot>
       </el-form-item>
       <!-- 其他插槽 -->
@@ -29,26 +26,7 @@
       <slot>
         <!-- 操作的按钮 -->
         <el-form-item>
-          <el-button
-            @click="handleSearch"
-            :type="searchBtn.type"
-            :disabled="searchBtn.disabled"
-            :round="searchBtn.round"
-            :circle="searchBtn.circle"
-            :plain="searchBtn.round"
-            :icon="searchBtn.icon"
-            >{{ searchBtn.text || 搜索 }}</el-button
-          >
-          <el-button
-            @click="handleReset"
-            :type="resetBtn.type"
-            :disabled="resetBtn.disabled"
-            :round="resetBtn.round"
-            :circle="resetBtn.circle"
-            :plain="resetBtn.round"
-            :icon="resetBtn.icon"
-            >{{ resetBtn.text || 重置 }}</el-button
-          >
+          <base-buttons :operation="optetions"></base-buttons>
         </el-form-item>
       </slot>
       <!-- 操作操作 -->
@@ -60,10 +38,12 @@
 </template>
 <script>
 import FormItemChild from "../FormItemChild/index.vue"
+import baseButtons from "../base-button/index.vue"
 export default {
   name: "BaseForm",
   components: {
     FormItemChild,
+    baseButtons,
   },
   props: {
     // 表单组件的数组对象
@@ -92,33 +72,37 @@ export default {
         return {}
       },
     },
-    // 搜索按钮
-    search: {
+    // 自定义按钮组属性及事件
+    operation: {
       type: Object,
       default() {
         return {
-          type: "primary",
-          plain: false,
-          round: false,
-          circle: false,
-          disabled: false,
-          icon: "",
-          text: "搜索",
-        }
-      },
-    },
-    // 重置按钮
-    reset: {
-      type: Object,
-      default() {
-        return {
-          type: "",
-          plain: false,
-          round: false,
-          circle: false,
-          disabled: false,
-          icon: "",
-          text: "重置",
+          btns: [
+            {
+              type: "primary",
+              plain: false,
+              round: false,
+              circle: false,
+              disabled: false,
+              icon: "",
+              text: "搜索",
+              on: {
+                click: this.handleSearch,
+              },
+            },
+            {
+              type: "",
+              plain: false,
+              round: false,
+              circle: false,
+              disabled: false,
+              icon: "",
+              text: "重置",
+              on: {
+                click: this.handleReset,
+              },
+            },
+          ],
         }
       },
     },
@@ -168,29 +152,25 @@ export default {
       this.$emit("resetBtn")
     },
   },
-  computed:{
-    searchBtn(){
-       return Object.assign({
-          type: "primary",
-          plain: false,
-          round: false,
-          circle: false,
-          disabled: false,
-          icon: "",
-          text: "搜索",
-       },this.search)
+  computed: {
+    optetions() {
+      let obj = {}
+      for (let key in this.operation) {
+        if (key === "btns") {
+          obj.btns = this.operation[key].map((item, i) => {
+            if (!item.on) {
+              item.on = {
+                click: i === 0 ? this.handleSearch : this.handleReset,
+              }
+            }
+            return item
+          })
+        } else {
+          obj[key] = this.operation[key]
+        }
+      }
+      return obj
     },
-    resetBtn(){
-      return Object.assign({
-          type: "",
-          plain: false,
-          round: false,
-          circle: false,
-          disabled: false,
-          icon: "",
-          text: "重置",
-       },this.reset)
-    }
-  }
+  },
 }
 </script>

@@ -11,13 +11,3 @@
 <!-- @vuese:index:props:end -->
 
 
-## Events
-
-<!-- @vuese:index:events:start -->
-|Event Name|Description|Parameters|
-|---|---|---|
-|blur|-|-|
-
-<!-- @vuese:index:events:end -->
-
-

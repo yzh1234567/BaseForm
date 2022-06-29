@@ -10,8 +10,7 @@
 |diasbled|-|`Boolean`|`false`|false|
 |labelWidth|-|`String`|`false`|0px|
 |form|表单元素值|`Object`|`false`|{}|
-|search|搜索按钮|`Object`|`false`|{"type":"primary","plain":false,"round":false,"circle":false,"disabled":false,"icon":"","text":"搜索"}|
-|reset|重置按钮|`Object`|`false`|{"type":"","plain":false,"round":false,"circle":false,"disabled":false,"icon":"","text":"重置"}|
+|operation|自定义按钮组属性及事件|`Object`|`false`|{"btns":[{"type":"primary","plain":false,"round":false,"circle":false,"disabled":false,"icon":"","text":"搜索","on":{}},{"type":"","plain":false,"round":false,"circle":false,"disabled":false,"icon":"","text":"重置","on":{}}]}|
 |inline|-|`Boolean`|`false`|false|
 
 <!-- @vuese:BaseForm:props:end -->
@@ -23,7 +22,7 @@
 |Event Name|Description|Parameters|
 |---|---|---|
 |submit|-|-|
-|reset|-|-|
+|resetBtn|-|-|
 
 <!-- @vuese:BaseForm:events:end -->
 
