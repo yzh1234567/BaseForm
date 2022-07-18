@@ -29,16 +29,12 @@ export default {
       this.form[this.info.name] = e
     },
     renderItem(element) {
-      let scopedSlots=element.scopedSlots
       let slots = element.slots
-      delete element.scopedSlots
-      delete element.slots
+      let attrs = this.depCopy(element,['on','slots','scopedSlots','nativeOn','slot'])
+      let ele =  this.depCopy(element,['slots'])
       let renderObj = {
-        ...element,
-        attrs: { ...element },
-      }
-      if(scopedSlots){
-        renderObj.scopedSlots = scopedSlots
+        ...ele,
+        attrs: { ...attrs },
       }
       let tag = element.tag || "el-input"
       if (element.tag === "el-select") {
@@ -136,6 +132,18 @@ export default {
               </div>
             )
           })
+    },
+    depCopy(obj,arr=[]){
+       if(!Array.isArray(arr)){
+        arr = []
+       }
+       let attrs = {}
+       for(let key in obj){
+         if(!arr.includes(key)){
+          attrs[key] = obj[key]
+         }
+       }
+       return attrs
     }
   },
 }
