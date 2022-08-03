@@ -40,7 +40,9 @@ export default {
       if (element.tag === "el-select") {
         return (
           <tag {...renderObj} vModel={this.form[element.name]}>
-            {element.options.map((e, index) => {
+            {
+              slots?this.productSlots(slots):
+              element.options.map((e, index) => {
               let attrs = {
                 ...e,
                 attrs: { ...e },
